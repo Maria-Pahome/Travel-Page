@@ -36,13 +36,15 @@ main {
   font-size: 1rem;
   align-items: center;
   justify-content: space-between;
+  color: white;
   width: 80%;
+  z-index: 1;
+  position: relative; 
   margin: auto;
-  padding: 2rem 0rem;
 }
 
 .line1,
-.line2 {
+.line2{
   width: 3rem;
   height: 0.2rem;
   margin: 0.4rem;
@@ -93,7 +95,7 @@ main {
 }
 
 .hike-span {
-  color: rgb(140, 103, 165);
+  color: rgb(134, 91, 163);
 }
 
 .hero-desc div {
@@ -121,20 +123,6 @@ main {
   align-self: flex-start;
 }
 
-.nav-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: white;
-  justify-content: space-around;
-  align-items: center;
-  z-index: 1;
-  opacity: 1;
-  clip-path: circle(50px at 100% -10%);
-  -webkit-clip-path: circle(50px at 100% -10%);
-}
 
 .burger {
   cursor: pointer;
@@ -166,7 +154,7 @@ main {
 .contact div {
   font-size: 3rem;
   padding: 2rem 0rem;
-  text-align: end;
+  text-align: start;
 }
 
 .contact p {
@@ -175,14 +163,35 @@ main {
   margin-right: 0.2rem;
 }
 
-.reveal-img,
-.reveal-text {
+.reveal-img, .reveal-text {
   position: absolute;
   width: 100%;
   height: 150%;
   background: black;
   left: 0;
   top: -15%;
+}
+
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1;
+  opacity: 1;
+  clip-path: circle(50px at 100% -10%);
+  -webkit-clip-path: circle(50px at 100% -10%);
+}
+
+.nav-swipe {
+  background-image: url('../assets/bg.jpg');
+  background-position: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .cursor {
@@ -195,12 +204,16 @@ main {
   pointer-events: none;
   transition: all 0.5s ease-in-out;
   transition-property: background, transform;
-  transform-origin: 75%, 75%;
-
+  transform-origin: 75% 75%;
 }
 
 .cursor.nav-active{
   background: rgb(99, 163, 189);
+  transform: scale(2);
+}
+
+.cursor.explore-active {
+  background: white;
   transform: scale(2);
 }
 
@@ -209,20 +222,15 @@ main {
   top: 50%;
   left: 50%;
   font-size: 0.5rem;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);/*center perfectly*/
   font-weight: bolder;
-
-}
-
-.cursor.explore-active {
-  background: white;
-  transform: scale(2);
 }
 
 .title {
   position: relative;
   overflow: hidden;
 }
+
 .title-swipe {
   width: 100%;
   height: 100%;
@@ -232,11 +240,7 @@ main {
   mix-blend-mode: darken;
   transform: translateY(100%);
 }
-.t-swipe1 {
-  background: rgb(86, 124, 228);
-}
-
-
+ 
 .scrollmagic-pin-spacer {
   position: static !important;
 }

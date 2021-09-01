@@ -49,33 +49,43 @@ function animateSlider(){
         .addTo(controller);
     });
 }
-
-let mouse = document.querySelector('.cursor');
-let mouseTxt = mouse.querySelector('span');
+const mouse = document.querySelector('.cursor');
+const mouseTxt = mouse.querySelector('span');
+const burger = document.querySelector('.burger');
 
 function cursor(e) {
     mouse.style.top = e.pageY + 'px';
     mouse.style.left = e.pageX + 'px';
 }
 
-function activeCursor(e){
+function activeCursor(e) {
     const item = e.target;
-    if(item.id === "logo" || item.classList.contains('burger')){
-        mouse.classList.add('nav-active');
-    }else {
-        mouse.classList.remove('nav-active');
+    if (item.id === "logo" || item.classList.contains("burger")) {
+      mouse.classList.add("nav-active");
+    } else {
+      mouse.classList.remove("nav-active");
     }
-    if(item.classList.contains('explore')){
-        mouse.classList.add('explore-active');
-        gsap.to('.title-swipe', 1,{y:'0%'});
-        mouseTxt.innerText = "Tap";
-    }else{
-        mouse.classList.remove('explore-active');
-        mouseTxt.innerText = "";
-        gsap.to('.title-swipe', 1,{y:'100%'});
+    if (item.classList.contains("explore")) {
+      mouse.classList.add("explore-active");
+      gsap.to(".title-swipe", 1, { y: "0%" });
+      mouseTxt.innerText = "Tap";
+    } else {
+      mouse.classList.remove("explore-active");
+      mouseTxt.innerText = "";
+      gsap.to(".title-swipe", 1, { y: "100%" });
     }
+  }
+
+function navToggle(e){
+  gsap.to(".line1",0.5,{rotate: "45", y: 5, background: 'red'});
+  gsap.to(".line2",0.5,{rotate: "-45", y: -5, background: 'red'});
+  gsap.to("#logo", 1, { color:"black"});
+  gsap.to(".nav-bar", 2, {clipPath: 'circle(2500px at 100% -10%)'});
 }
 
+
+//Event Listeners 
+burger.addEventListener('click',navToggle);
 window.addEventListener('mousemove',cursor);
 window.addEventListener('mouseover', activeCursor);
 animateSlider();
