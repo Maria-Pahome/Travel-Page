@@ -4,7 +4,11 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  background-color: black;
+  background-color: black; 
+}
+
+body{
+  position: relative;
 }
 
 .page-container {
@@ -16,6 +20,7 @@ body {
 
 main {
   overflow-y: hidden;
+  position: absolute;
 }
 
 #logo {
@@ -243,4 +248,75 @@ main {
  
 .scrollmagic-pin-spacer {
   position: static !important;
+}
+
+body.hide{
+   overflow: hidden; /*stops the scrolling on the menu page  */
+}
+
+/* other pages */
+
+.fashion1,.fashion2,.fashion3{
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  margin: auto;
+  color: white;
+  margin-top: rem;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.fashion-img{
+  height: 80vh;
+  flex-basis: 30rem;
+}
+
+.fashion-text{
+  flex: 1;
+  position: relative;
+  flex-basis: 25rem;
+  text-align: justify;
+}
+
+.fashion-img img{
+  width: 80%;
+  height: 100%;
+  margin-left: 20%;
+  object-fit: cover;
+}
+
+.fashion-text h1{
+  font-size: 6rem;
+  padding: 3rem 0rem;
+  font-weight: 800;
+}
+
+.fashion1 h1{
+  color: rgb(201, 197, 143);
+}
+
+.fashion2 h1{ 
+  color: rgb(147, 143, 201);
+}
+
+.fashion3 h1{
+  color: rgb(56, 41, 122);
+}
+
+.fashion-text p{
+  font-size: 1.4rem;
+  padding: 0.5rem 0.5rem 0rem 0rem;
+  margin-bottom: 5rem;
+}
+
+.fashion-nr{
+  font-size: 15rem;
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  color: white;
+  opacity: 0.3;
 }

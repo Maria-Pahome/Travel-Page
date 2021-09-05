@@ -3,7 +3,7 @@ let slideScene;
 let pageScene;
 
 
-function animateSlider(){
+function animateSlides(){
     //Init controller
     controller = new ScrollMagic.Controller();
     //animation - select something 
@@ -27,7 +27,7 @@ function animateSlider(){
             triggerhook: 0.25,
             reverse: false
         })
-        // .addIndicators({colorStart:'white', colorTrigger:'white', name:'slide'})
+        .addIndicators({colorStart:'white', colorTrigger:'white', name:'slide'})
         .setTween(slideTl)
         .addTo(controller);
         //new animation
@@ -42,7 +42,7 @@ function animateSlider(){
             duration:"100%", 
             triggerHook:0
         })
-        // .addIndicators({colorStart:'white', colorTrigger:'white', name:'page', indent: 200})
+        .addIndicators({colorStart:'white', colorTrigger:'white', name:'page', indent: 200})
         
         .setPin(slide, {pushFollowers: false})
         .setTween(pageTl)
@@ -77,15 +77,63 @@ function activeCursor(e) {
   }
 
 function navToggle(e){
+  if(!e.target.classList.contains('active')){
+  e.target.classList.add('active');
   gsap.to(".line1",0.5,{rotate: "45", y: 5, background: "black"});
   gsap.to(".line2",0.5,{rotate: "-45", y: -5, background: "black"});
   gsap.to("#logo", 1, { color:"black"});
-  gsap.to(".nav-bar", 2, {clipPath: "circle(2500px at 100% -10%)"});
+  gsap.to(".nav-bar", 1, {clipPath: "circle(2500px at 100% -10%)"});
+  document.body.classList.add("hide");
+  } else{
+    e.target.classList.remove('active');
+    gsap.to(".line1",0.5,{rotate: "0", y: 0, background: "white"});
+    gsap.to(".line2",0.5,{rotate: "0", y: 0, background: "white"});
+    gsap.to("#logo", 1, { color:"white"});
+    gsap.to(".nav-bar", 1, {clipPath: "circle(50px at 100% -10%)"});
+    document.body.classList.remove("hide");
+  }
 }
+
+//Barba Page Transitions
+const logo = document.querySelector('#logo');
+barba.init({
+  views: [{
+    namespace: "home",
+    beforeEnter(){
+      animateSlides();
+    },
+    beforeLeave(){
+      slideScene.destroy();
+      pageScene.destroy();
+      controller.destroy();
+    }
+  }, 
+  {
+    namespace:"fashion",
+  }
+], 
+  transitions: [
+    {
+      leave({current, next}){
+        let done= this.async();
+          //animations
+        window.scrollTo(0,0);
+        const tl = gsap.timeline({defaults:{ease:"power2.inOut"} });
+        tl.fromTo(current.container,1,{opacity:1},{opacity:0});
+        tl.fromTo('.swipe',0.75, {x:'-100%'},{x:'0%',onComplete:done},"-=0.5");
+      },
+      enter({current, next}){
+        let done= this.async();
+        const tl = gsap.timeline({defaults:{ease:"power2.inOut"} });
+        tl.fromTo(next.container,1,{opacity:0},{opacity:1, onComplete: done});
+      }
+  }
+] 
+});
 
 
 //Event Listeners 
 burger.addEventListener('click',navToggle);
 window.addEventListener('mousemove',cursor);
 window.addEventListener('mouseover', activeCursor);
-animateSlider();
+animateSlides();
