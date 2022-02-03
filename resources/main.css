@@ -320,3 +320,27 @@ body.hide{
   color: white;
   opacity: 0.3;
 }
+
+.swipe {
+  position: fixed;
+  width:100%;
+  height: 100%;
+  top:0;
+  left:0;
+  transform: translateX(-100%);
+}
+
+.swipe1{
+  background-color: rgb(134, 91, 163);
+  z-index:5;
+}
+
+.swipe2{
+  background-color: rgb(102, 91, 163);
+  z-index:4;
+}
+
+.swipe3{
+  background-color: rgb(163, 138, 91);
+  z-index: 3;
+}
